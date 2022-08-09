@@ -4,11 +4,10 @@ import br.com.acrani.springbootmongodb.dto.UserDto;
 import br.com.acrani.springbootmongodb.models.User;
 import br.com.acrani.springbootmongodb.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,5 +30,12 @@ public class UserResource {
     public ResponseEntity<UserDto> findById(@PathVariable String id){
         UserDto byId = userService.findById(id);
         return ResponseEntity.ok().body(byId);
+    }
+
+    @PostMapping
+    public ResponseEntity<User> save(@RequestBody UserDto userDto){
+        User save = userService.save(userDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/"+save.getId()).toUriString());
+        return ResponseEntity.created(uri).body(save);
     }
 }
