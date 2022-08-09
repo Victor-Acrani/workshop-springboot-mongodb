@@ -1,8 +1,11 @@
 package br.com.acrani.springbootmongodb.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serial;
 import java.io.Serializable;
 
+@Document(collection =  "user")
 public class User implements Serializable {
 
     @Serial
