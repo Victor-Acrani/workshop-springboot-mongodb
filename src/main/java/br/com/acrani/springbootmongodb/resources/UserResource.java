@@ -5,6 +5,7 @@ import br.com.acrani.springbootmongodb.models.User;
 import br.com.acrani.springbootmongodb.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +25,11 @@ public class UserResource {
     public ResponseEntity<List<UserDto>> findAll() {
         List<UserDto> all = userService.findAll();
         return ResponseEntity.ok().body(all);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> findById(@PathVariable String id){
+        UserDto byId = userService.findById(id);
+        return ResponseEntity.ok().body(byId);
     }
 }
