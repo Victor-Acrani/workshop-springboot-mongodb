@@ -33,11 +33,18 @@ public class UserService {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
         return userRepository.save(user);
-
     }
 
     public void delete(String id){
         findById(id);
         userRepository.deleteById(id);
+    }
+
+    public User update(String id, UserDto userDto){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado. Id:" + id));
+        user.setEmail(userDto.getEmail());
+        user.setName(userDto.getName());
+        return userRepository.save(user);
     }
 }
