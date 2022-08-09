@@ -1,5 +1,6 @@
 package br.com.acrani.springbootmongodb.resources;
 
+import br.com.acrani.springbootmongodb.dto.UserDto;
 import br.com.acrani.springbootmongodb.models.User;
 import br.com.acrani.springbootmongodb.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class UserResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = userService.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<UserDto>> findAll() {
+        List<UserDto> all = userService.findAll();
+        return ResponseEntity.ok().body(all);
     }
 }
