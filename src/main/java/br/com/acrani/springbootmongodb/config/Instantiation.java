@@ -1,5 +1,6 @@
 package br.com.acrani.springbootmongodb.config;
 
+import br.com.acrani.springbootmongodb.dto.AuthorDto;
 import br.com.acrani.springbootmongodb.models.Post;
 import br.com.acrani.springbootmongodb.models.User;
 import br.com.acrani.springbootmongodb.repositories.PostRepository;
@@ -38,9 +39,9 @@ public class Instantiation implements CommandLineRunner {
         userRepository.saveAll(List.of(maria, alex, bob));
 
         Post post1 = new Post(null, simpleDateFormat.parse("21/03/2018"), "Partiu viagem",
-                "Vou viajar para São Paulo. Abraços!", maria);
+                "Vou viajar para São Paulo. Abraços!", new AuthorDto(maria));
         Post post2 = new Post(null, simpleDateFormat.parse("23/03/2018"),  "Bom dia",
-                "Acordei feliz hoje!", maria);
+                "Acordei feliz hoje!", new AuthorDto(maria));
         postRepository.saveAll(List.of(post1, post2));
     }
 }
