@@ -1,5 +1,6 @@
 package br.com.acrani.springbootmongodb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +19,7 @@ public class User implements Serializable {
     private String name;
     private String email;
     @DBRef(lazy = true)
+    @JsonIgnore
     private List<Post> posts = new ArrayList<>();
 
     public User() {

@@ -1,13 +1,16 @@
 package br.com.acrani.springbootmongodb.models;
 
 import br.com.acrani.springbootmongodb.dto.AuthorDto;
+import br.com.acrani.springbootmongodb.dto.CommentDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "post")
 public class Post implements Serializable {
@@ -22,6 +25,8 @@ public class Post implements Serializable {
     private String body;
 
     private AuthorDto author;
+
+    private List<CommentDto> comments = new ArrayList<>();
 
     public Post() {
     }
@@ -72,6 +77,10 @@ public class Post implements Serializable {
 
     public void setAuthor(AuthorDto author) {
         this.author = author;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
     }
 
     @Override
