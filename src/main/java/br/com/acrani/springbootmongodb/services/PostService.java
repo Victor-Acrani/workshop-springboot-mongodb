@@ -5,6 +5,8 @@ import br.com.acrani.springbootmongodb.repositories.PostRepository;
 import br.com.acrani.springbootmongodb.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
     private final PostRepository postRepository;
@@ -18,4 +20,7 @@ public class PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("Post não encontrado. Id:" + id));
     }
 
+    public List<Post> findByTitleContaining(String text){
+        return postRepository.findByTitleContainingIgnoreCase(text);
+    }
 }

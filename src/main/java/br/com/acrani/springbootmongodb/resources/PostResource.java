@@ -1,12 +1,12 @@
 package br.com.acrani.springbootmongodb.resources;
 
 import br.com.acrani.springbootmongodb.models.Post;
+import br.com.acrani.springbootmongodb.resources.utils.URL;
 import br.com.acrani.springbootmongodb.services.PostService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -22,6 +22,12 @@ public class PostResource {
     public ResponseEntity<Post> findbyId(@PathVariable String id){
         Post byId = postService.findById(id);
         return ResponseEntity.ok().body(byId);
+    }
+
+    @GetMapping("/titlesearch")
+    public ResponseEntity<List<Post>> findbyTitleContaining(@RequestParam(value = "text", defaultValue = "") String text){
+        List<Post> posts = postService.findByTitleContaining(URL.decodeParam(text));
+        return ResponseEntity.ok().body(posts);
     }
 
 }
