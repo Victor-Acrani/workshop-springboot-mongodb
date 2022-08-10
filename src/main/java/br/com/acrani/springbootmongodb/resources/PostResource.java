@@ -30,4 +30,12 @@ public class PostResource {
         return ResponseEntity.ok().body(posts);
     }
 
+    @GetMapping("/fullsearch")
+    public ResponseEntity<List<Post>> fullSearch(@RequestParam(value = "text", defaultValue = "") String text,
+                                                 @RequestParam(value = "minDate", defaultValue = "") String minDate,
+                                                 @RequestParam(value = "maxDate", defaultValue = "") String maxDate){
+        List<Post> posts = postService.fullSearch(URL.decodeParam(text), minDate, maxDate);
+        return ResponseEntity.ok().body(posts);
+    }
+
 }
