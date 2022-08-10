@@ -23,10 +23,10 @@ public class UserService {
         return all.stream().map(UserDto::new).toList();
     }
 
-    public UserDto findById(String id){
-        User user = userRepository.findById(id)
+    public User findById(String id){
+        return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado. Id:" + id));
-        return new UserDto(user);
+
     }
 
     public User save(UserDto userDto){
@@ -41,10 +41,10 @@ public class UserService {
     }
 
     public User update(String id, UserDto userDto){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado. Id:" + id));
+        User user = findById(id);
         user.setEmail(userDto.getEmail());
         user.setName(userDto.getName());
         return userRepository.save(user);
     }
+
 }

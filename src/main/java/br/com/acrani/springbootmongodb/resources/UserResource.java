@@ -1,6 +1,7 @@
 package br.com.acrani.springbootmongodb.resources;
 
 import br.com.acrani.springbootmongodb.dto.UserDto;
+import br.com.acrani.springbootmongodb.models.Post;
 import br.com.acrani.springbootmongodb.models.User;
 import br.com.acrani.springbootmongodb.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,15 @@ public class UserResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable String id){
-        UserDto byId = userService.findById(id);
+    public ResponseEntity<User> findById(@PathVariable String id){
+        User byId = userService.findById(id);
         return ResponseEntity.ok().body(byId);
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User byId = userService.findById(id);
+        return ResponseEntity.ok().body(byId.getPosts());
     }
 
     @PostMapping
